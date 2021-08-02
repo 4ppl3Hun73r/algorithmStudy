@@ -54,8 +54,8 @@ public class Solution0730 {
                 }
                 // 여기서 먼가 함
                 Integer 상하좌우중하나 = updateMat[newX][newY]; //x = 1, y =0
-                Integer 수정원본위치 = updateMat[cell[0]][cell[1]]; // 정환님 대박 !! ~^_^~
-                if (상하좌우중하나 != null && (상하좌우중하나 == 0 || 상하좌우중하나 <= 수정원본위치 + 1)) {
+                Integer 수정된메트릭스에서원본위치 = updateMat[cell[0]][cell[1]]; // 정환님 대박 !! ~^_^~bb
+                if (상하좌우중하나 != null && (상하좌우중하나 == 0 || 상하좌우중하나 <= 수정된메트릭스에서원본위치 + 1)) {
                     continue;
                 }
                 queue.add(new int[]{newX, newY});
