@@ -46,4 +46,8 @@ class TreeNode {
         this.left = left;
         this.right = right;
     }
+
+    public String toString() {
+        return String.format("[%d -> %s -> %s]", val, (left != null ? left.toString() : ""), (right != null ? right.toString() : ""));
+    }
 }
