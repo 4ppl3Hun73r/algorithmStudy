@@ -16,7 +16,7 @@ public class Solution0804 {
         // subSet(4) => [4, subSet()]
         // subSet() => []
 
-        //
+        // 1 1,2 1,2,3 1,2,3,4 1,2,3 1,3 1,4
         List<List<Integer>> res = new ArrayList<>();
 
         return res;
