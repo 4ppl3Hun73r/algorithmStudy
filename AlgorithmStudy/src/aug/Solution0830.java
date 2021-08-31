@@ -53,6 +53,39 @@ public class Solution0830 {
         return count;
     }
 
+    public int dp(int[] nums, int n) {
+        boolean[] dp = new boolean[10001];
+        dp[0] = true;
+        long totalSum = 0L;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 10000; j >= 0; j--) {
+                if (j - nums[i] >= 0 && dp[j - nums[i]]) {
+                    dp[j] = true;
+                }
+            }
+            totalSum += nums[i];
+        }
+        int patch = 0;
+        for (int i = 1; i < 10001 && i <= n; i++) {
+            if (!dp[i]) {
+                patch++;
+                for (int j = Math.min(10000, n); j > i; j--) {
+                    if (dp[j - i]) {
+                        dp[j] = true;
+                    }
+                }
+                dp[i] = true;
+                totalSum += i;
+            }
+        }
+
+        while (n>10000 && totalSum < n) {
+            patch++;
+            totalSum += (totalSum + 1);
+        }
+        return patch;
+    }
+
     public static void main(String[] args) {
         Solution0830 s = new Solution0830();
 
