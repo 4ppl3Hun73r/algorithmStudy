@@ -2,6 +2,7 @@ package aug;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.TreeNode;
 
 // https://leetcode.com/explore/challenge/card/august-leetcoding-challenge-2021/613/week-1-august-1st-august-7th/3838/
 public class Solution0805 {
@@ -35,19 +36,3 @@ public class Solution0805 {
 
 }
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-
-    public String toString() {
-        return String.format("[%d -> %s -> %s]", val, (left != null ? left.toString() : ""), (right != null ? right.toString() : ""));
-    }
-}

@@ -1,6 +1,7 @@
 package aug;
 
 import java.util.*;
+import model.TreeNode;
 
 // https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
 public class Codec {
