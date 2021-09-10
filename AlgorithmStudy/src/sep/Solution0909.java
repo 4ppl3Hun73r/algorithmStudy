@@ -13,14 +13,14 @@ public class Solution0909 {
         for (int i = shifts.length - 1; i >= 0; i--) {
             shifts[i] += prev%26;
             prev = shifts[i];
-            char i = (s.charAt(i) - 'a' + shifts[i])%26 + 'a';
-            sb.append(i);
+            char c = (char) ((s.charAt(i) - 'a' + shifts[i])%26 + 'a');
+            sb.append(c);
         }
 
         return sb.reverse().toString();
     }
 
-    private void jiho(String s, int[] shifts) {
+    private String jiho(String s, int[] shifts) {
         char[] charArray = s.toCharArray();
         int sum = 0;
         for (int i = shifts.length - 1; i >= 0; i--) {
@@ -30,7 +30,7 @@ public class Solution0909 {
         return new String(charArray);
     }
 
-    private void ym(String s, int[] shifts){
+    private String ym(String s, int[] shifts){
         int shiftsSum = 0;
         char[] arr = s.toCharArray();
         for (int i = shifts.length - 1; i >= 0; i--) {
