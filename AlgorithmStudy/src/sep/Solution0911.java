@@ -100,6 +100,7 @@ public class Solution0911 {
         System.out.println(Arrays.deepToString(dp));
         return result;
     }
+
     private void reDp(int[] nums, Map<Long, List<Integer>> numsIndexMap, int[][] dp, int i, int j) {
         long diff = (long)nums[j] - (long)nums[i];
         long target = nums[j] + diff;
@@ -118,12 +119,49 @@ public class Solution0911 {
         }
     }
 
+    public int jiho2(int[] nums) {
+        int n = nums.length;
+        int[][] dp = new int[n][n];
+        int result = 0;
+
+        Map<Long, List<Integer>> numsIndexMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            long num = (long)nums[i];
+            List<Integer> l = numsIndexMap.computeIfAbsent(num, t -> new ArrayList<>());
+            l.add(i);
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                long target = 2 * (long)nums[j] - nums[i]; // i 가 더 큰값
+                // dp[i][j] => dp[i][j] + dp[j][k] + 1;
+                if (numsIndexMap.containsKey(target)) {
+                    for (int k : numsIndexMap.get(target)) {
+                        if (k < j) {
+                            dp[i][j] += (dp[j][k] + 1);
+                        }
+                    }
+                }
+                //result += dp[i][j];
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                result += dp[i][j];
+            }
+        }
+        System.out.println(Arrays.deepToString(dp));
+        return result;
+    }
+
     public static void main(String[] args) {
         Solution0911 s = new Solution0911();
 
-        System.out.println(s.solution(new int[]{1, 1, 2, 3, 4, 5}));
-        //System.out.println(s.solution(new int[]{7, 7, 7, 7, 7}));
-        //System.out.println(s.solution(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}));
+        System.out.println(s.jiho2(new int[]{2, 4, 6, 8, 10}));
+        System.out.println(s.jiho2(new int[]{1, 1, 2, 3, 4, 5}));
+        System.out.println(s.jiho2(new int[]{7, 7, 7, 7, 7}));
+        System.out.println(s.jiho2(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}));
     }
 
 
