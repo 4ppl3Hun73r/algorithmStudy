@@ -18,7 +18,7 @@ public class Solution0916 {
         // [4,8,12,16]
         // arr[1] > arr[2] k 가 홀수,
         // [4,8] , [8,12], [12,16] 지그재그 확인
-
+        int len = arr.length;
         int[][] dp = new int[len][2];
         // dp[i][0] => i번째까지 최고 길이 (짝수) arr[i] > arr[i+1]
         // dp[i][1] => i번째까지 최고 길이 (홀수) arr[i] < arr[i-1]
@@ -27,7 +27,6 @@ public class Solution0916 {
         // dp2[i] = dp2[i - 1] + 1;
         // dp[i][j] => i ~ j  사이의 최고길이
 
-        int len = arr.length;
         int max = 1;
         int up = 1;
         int down = 1;
