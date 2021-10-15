@@ -40,6 +40,7 @@ public class LetterCasePermutation {
                     // 대문자로 한번 더 찾기
                     arr[i] = Character.toUpperCase(arr[i]);
                     permutation(arr, i + 1);
+                    break;
                 }
             }
         }
