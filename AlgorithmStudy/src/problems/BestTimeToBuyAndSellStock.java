@@ -4,15 +4,15 @@ package problems;
 public class BestTimeToBuyAndSellStock {
     public int maxProfit(int[] prices) {
         int result = 0;
-        for (int i = 0; i < prices; i++) {
-            for (int j = i + 1; j < prices; j++) {
+        for (int i = 0; i < prices.length; i++) {
+            for (int j = i + 1; j < prices.length; j++) {
                 result = Math.max(prices[j] - prices[i], result);
             }
         }
 
         // DP, ~~Doble Pointer~~
         int len = prices.length;
-        int result = 0;
+        result = 0;
         int maxRight = prices[len - 2];
         for (int i = len - 2; i >= 0; i --) {
             result = Math.max(result, maxRight - prices[i]);
