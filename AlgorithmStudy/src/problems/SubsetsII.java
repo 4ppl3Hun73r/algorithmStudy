@@ -1,0 +1,36 @@
+package problems;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class SubsetsII {
+    List<List<Integer>> result;
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        result = new ArrayList<>();
+        Arrays.sort(nums);
+
+        for (int i = 0; i <= nums.length; i++) {
+            subSet(i, 0, new ArrayList<>(), nums);
+        }
+
+        return result;
+    }
+
+    private void subSet(int len, int index, List<Integer> subSet, int[] nums) {
+        if (len == subSet.size()) {
+            result.add(new ArrayList<>(subSet));
+            return ;
+        }
+
+        for (int i = index; i < nums.length; i++) {
+            if (i != index && nums[i - 1] == nums[i]) {
+                continue;
+            }
+            subSet.add(nums[i]);
+            subSet(len, i + 1, subSet, nums);
+            subSet.remove(subSet.size() - 1);
+        }
+    }
+}
