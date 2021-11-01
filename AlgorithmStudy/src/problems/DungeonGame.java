@@ -6,57 +6,40 @@ import java.util.Arrays;
 
 // https://leetcode.com/problems/dungeon-game/
 public class DungeonGame {
-    // TODO 푸는중
     public int calculateMinimumHP(int[][] dungeon) {
         int r = dungeon.length;
         int c = dungeon[0].length;
 
-        int[][] dp = new int[r][c];
-
+        int[][] dp = new int[r + 1][c + 1];
+        for (int i = r; i >= 0; i--) {
+            for (int j = c; j >= 0; j--) {
+                dp[i][j] = Integer.MAX_VALUE;
+            }
+        }
+        dp[r][c - 1] = 1;
+        dp[r - 1][c] = 1;
+        // 도착지 오른쪽 아래를 1로 초기화
         /*
-        dp[0][0] => 해당 위치까지의 도달할수 있는 최소 HP
+        종료 지점에서 역으로 탐색
+        dp[i][j] = if min(dp[i + 1][j], dp[i - 1]) - dungeon[i][j] > 0 ? min(dp[i + 1][j], dp[i - 1]) - dungeon[i][j] : 1// 최소로 1의 체력이 있어야 한다.
          */
 
-        dp[0][0] = Math.min(dungeon[0][0], 0); // 음수는 그대로 넣기
-        for (int i = 1; i < c; i++) {
-            dp[0][i] = dp[0][i - 1] + dungeon[0][i] > 0 ? dp[0][i - 1] : dp[0][i - 1] + dungeon[0][i];
-        }
-        for (int i = 1; i < r; i++) {
-            dp[i][0] = dp[i - 1][0] + dungeon[i][0] > 0 ? dp[i - 1][0] : dp[i - 1][0] + dungeon[i][0];
-        }
 
-        for (int i = 1; i < r; i++) {
-            for (int j = 1; j < c; j++) {
-                int left = j - 1;
-                int up = i - 1;
-                // move rightward
-                int leftHp = 0;
-                if (left >= 0) {
-                    leftHp = dp[i][left];
-                }
-                // move downward
-                int upHp = 0;
-                if (up >= 0) {
-                    upHp = dp[up][j];
-                }
 
-                int maxHp = 0;
-                if (leftHp < 0 && upHp < 0) {
-                    maxHp = Math.max(leftHp, upHp);
+        for (int i = r - 1; i >= 0; i--) {
+            for (int j = c - 1; j >= 0; j--) {
+                int needHp = Math.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j];
+
+                if (needHp > 0) {
+                    dp[i][j] = needHp;
                 } else {
-                    maxHp = Math.min(leftHp, upHp);
-                }
-
-                if (dungeon[i][j] + maxHp > 0) {
-                    dp[i][j] = maxHp;
-                } else {
-                    dp[i][j] = maxHp + dungeon[i][j];
+                    dp[i][j] = 1;
                 }
                 System.out.println(Arrays.deepToString(dp).replaceAll("],", "\n"));
             }
         }
 
-        return -(dp[r - 1][c - 1] - 1);
+        return dp[0][0];
     }
 
     public static void main(String[] args) {

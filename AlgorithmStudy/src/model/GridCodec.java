@@ -34,7 +34,7 @@ public class GridCodec {
         for (int i = 0; i < row; i++) {
             String[] c = p[i].split(",");
             for (int j = 0; j < col; j++) {
-                result[i][j] = c[j].charAt(0);
+                result[i][j] = c[j].charAt(1);
             }
         }
 
