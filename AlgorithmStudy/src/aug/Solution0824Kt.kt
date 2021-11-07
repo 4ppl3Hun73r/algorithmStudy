@@ -14,15 +14,15 @@ class Solution0824Kt {
      * }
      */
     class Solution {
-        private lateinit var inputRoot: TreeNode
+        private lateinit var inputRoot: TreeNodeKt
 
-        fun findTarget(root: TreeNode?, k: Int): Boolean {
+        fun findTarget(root: TreeNodeKt?, k: Int): Boolean {
             if (root == null) return false
             inputRoot = root
             return check(inputRoot, k)
         }
 
-        private fun check(root: TreeNode?, k: Int): Boolean {
+        private fun check(root: TreeNodeKt?, k: Int): Boolean {
             if (root == null) return false
 
             var result = false
@@ -33,7 +33,7 @@ class Solution0824Kt {
             return result || check(root.left, k) || check(root.right, k)
         }
 
-        private fun find(target: Int, root: TreeNode?, current: TreeNode): Boolean {
+        private fun find(target: Int, root: TreeNodeKt?, current: TreeNodeKt): Boolean {
             return when {
                 root == null -> false
                 root !== current && root.`val` == target -> true
@@ -44,7 +44,7 @@ class Solution0824Kt {
     }
 
     data class Input(private val root: String, private val k: Int) {
-        val rootNode: TreeNode? = root.toTreeNode()
+        val rootNode: TreeNodeKt? = root.toTreeNode()
         val target get() = k
     }
 }
@@ -63,18 +63,18 @@ fun main() {
 }
 
 
-fun String.toTreeNode(): TreeNode? = TreeNode.deserialize(this)
+fun String.toTreeNode(): TreeNodeKt? = TreeNodeKt.deserialize(this)
 
 
-class TreeNode(var `val`: Int) {
-    var left: TreeNode? = null
-    var right: TreeNode? = null
+class TreeNodeKt(var `val`: Int) {
+    var left: TreeNodeKt? = null
+    var right: TreeNodeKt? = null
 
     companion object {
         /**
          * @param arrayString example: [1,2,null,3,4,5]
          */
-        fun deserialize(arrayString: String): TreeNode? {
+        fun deserialize(arrayString: String): TreeNodeKt? {
             val nodes = arrayString
                     .removeSurrounding("[", "]")
                     .split(",")
@@ -82,7 +82,7 @@ class TreeNode(var `val`: Int) {
                         when (it) {
                             "" -> null // case "[]"
                             "null" -> null
-                            else -> TreeNode(it.toInt())
+                            else -> TreeNodeKt(it.toInt())
                         }
                     }
 
@@ -101,7 +101,7 @@ class TreeNode(var `val`: Int) {
     private fun serialize(): String {
         val list = mutableListOf<Int?>()
 
-        val queue: Queue<TreeNode> = LinkedList()
+        val queue: Queue<TreeNodeKt> = LinkedList()
         queue.offer(this)
 
         while (queue.isNotEmpty()) {
