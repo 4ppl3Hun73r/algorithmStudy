@@ -139,7 +139,7 @@ public class Solution1124 {
 
                  A     |------|
                  B |------|
-                 */
+                 */ // bbbb
             }
         }
 
@@ -151,7 +151,7 @@ public class Solution1124 {
         int i = 0, j = 0;
 
         // O(Max(N, M))
-        while (i < A.length && j < B.length) {
+        while (i < A.length && j < B.length) { // TT
             // Let's check if A[i] intersects B[j].
             // lo - the startpoint of the intersection
             // hi - the endpoint of the intersection
