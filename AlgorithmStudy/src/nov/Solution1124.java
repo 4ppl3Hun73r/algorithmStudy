@@ -5,7 +5,98 @@ import java.util.List;
 
 // https://leetcode.com/problems/interval-list-intersections/
 public class Solution1124 {
+
     public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        ArrayList<int[]> result = new ArrayList<>();
+        /*
+        Input:
+        firstList = [[0,2],[5,10],[13,23],[24,25]]
+        secondList = [[1,5],[8,12],[15,24],[25,26]]
+        Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+
+         A |------|       |---|    |---|
+         B     |------|       |-----|
+         ANS)  |--|           |    ||
+
+         A     |------|
+         B |------|
+         ANS)  |--|
+
+         A |------||-----|
+         B     |------|
+
+         A     |------|
+         B |------|     |------|
+
+         //  13ms
+         //   3ms
+         */
+
+        int jIdx = 0;
+        // A
+        for (int i = 0; i < firstList.length; i++) {
+
+            int[] sectionA = firstList[i];
+            int minA = sectionA[0];
+            int maxA = sectionA[1];
+
+            // B
+            for (int j = jIdx; j < secondList.length; j++) {
+                int[] sectionB = secondList[i];
+                int minB = sectionB[0];
+                int maxB = sectionB[1];
+                /*
+
+
+                 minA   maxA
+                A |----------------------|
+                B     |------|   |---|
+                     minB  maxB
+                ANS   |--|       |---|
+                    minB maxA
+
+                        minA   maxA
+                A         |------|
+                B     |------|
+                     minB    maxB
+                ANS       |--|
+                        minA maxB
+
+                 */
+
+                if (maxA < minB) {
+                    /*
+                    i |-----------| |---|
+                    j               |----| |------|
+                     */
+                    jIdx = j;
+                    break;
+                }
+
+                /*
+                *    minA   maxA
+                    A |------|
+                    B     |------|
+                         minB    maxB
+                    ANS   |--|
+                        minB maxA
+                * */
+                int[] resultSection = new int[2];
+                if (maxB >= minA) {
+                    resultSection[0] = minA;
+                    resultSection[1] = maxB;
+                } else {
+                    resultSection[0] = minB;
+                    resultSection[1] = maxA;
+                }
+
+                result.add(resultSection);
+            }
+        }
+        return result.toArray(new int[result.size()][]);
+    }
+    
+    public int[][] intervalIntersection0(int[][] firstList, int[][] secondList) {
         ArrayList<int[]> result = new ArrayList<>();
 
         int startJ = 0;
@@ -27,7 +118,7 @@ public class Solution1124 {
                     |-----------| |---|
                                  |----| |------|
                      */
-                    startJ = Math.max(0, j - 1);
+                    startJ = j;
                     break;
                 }
 
