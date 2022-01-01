@@ -1,7 +1,7 @@
 package contest;
 
-import aug.Codec;
 import model.TreeNode;
+import y2021.aug.Codec;
 
 import java.util.ArrayList;
 import java.util.List;
