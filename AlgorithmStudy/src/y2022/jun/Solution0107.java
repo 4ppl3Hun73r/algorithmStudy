@@ -90,6 +90,12 @@ class Solution {
         ListNode curr = this.head;
         while (curr != null) {
             // decide whether to include the element in reservoir
+            // Math.random -> 0.0 < double < 1.0
+            // 당첨된에를 포인터가 있고 -> 4
+            // 1 -> 무조건 당첨 1 / 1
+            // 2 -> 1 / 2
+            // 3 -> 1 / 3
+            // 4 -> 1 / 4
             if (Math.random() < 1.0 / scope) // 1, 0.5, 0.3 ... (1/N)
                 chosenValue = curr.val;
             // move on to the next node
