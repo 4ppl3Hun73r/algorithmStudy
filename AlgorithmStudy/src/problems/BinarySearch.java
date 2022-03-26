@@ -1,7 +1,5 @@
 package problems;
 
-import java.util.Arrays;
-
 public class BinarySearch {
     public int search(int[] nums, int target) {
         int len = nums.length;
@@ -23,7 +21,7 @@ public class BinarySearch {
             }
         }
 
-        return end;
+        return -1;
     }
 
     public static void main(String[] args) {
