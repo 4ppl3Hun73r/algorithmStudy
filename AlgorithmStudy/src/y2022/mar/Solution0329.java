@@ -3,7 +3,7 @@ package y2022.mar;
 public class Solution0329 {
 
 
-    // y2022.jun.Solution0119.detectCycle 와 같은 문제로 해결 가능
+    // y2022.jan.Solution0119.detectCycle 와 같은 문제로 해결 가능
     public int findDuplicate(int[] nums) {
         /*
         1 ~ N 까지 값이 있음
