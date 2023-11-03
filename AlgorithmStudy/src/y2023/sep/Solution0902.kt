@@ -1,4 +1,4 @@
-package y2023.aug
+package y2023.sep
 
 // https://leetcode.com/problems/extra-characters-in-a-string/?envType=daily-question&envId=2023-09-02
 class Solution0902 {
